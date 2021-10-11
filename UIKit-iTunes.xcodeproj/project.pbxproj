@@ -9,19 +9,21 @@
 /* Begin PBXBuildFile section */
 		B4108194271382D40058C12F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4108193271382D40058C12F /* AppDelegate.swift */; };
 		B4108196271382D40058C12F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4108195271382D40058C12F /* SceneDelegate.swift */; };
-		B4108198271382D40058C12F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4108197271382D40058C12F /* ViewController.swift */; };
+		B4108198271382D40058C12F /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4108197271382D40058C12F /* MainViewController.swift */; };
 		B410819D271382D50058C12F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B410819C271382D50058C12F /* Assets.xcassets */; };
 		B41081A0271382D50058C12F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B410819E271382D50058C12F /* LaunchScreen.storyboard */; };
+		B41081A827138ED90058C12F /* ExtensionMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41081A727138ED90058C12F /* ExtensionMainViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		B4108190271382D40058C12F /* UIKit-iTunes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "UIKit-iTunes.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B4108193271382D40058C12F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B4108195271382D40058C12F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		B4108197271382D40058C12F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		B4108197271382D40058C12F /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		B410819C271382D50058C12F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B410819F271382D50058C12F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B41081A1271382D50058C12F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B41081A727138ED90058C12F /* ExtensionMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionMainViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,10 +58,11 @@
 			children = (
 				B4108193271382D40058C12F /* AppDelegate.swift */,
 				B4108195271382D40058C12F /* SceneDelegate.swift */,
-				B4108197271382D40058C12F /* ViewController.swift */,
+				B4108197271382D40058C12F /* MainViewController.swift */,
 				B410819C271382D50058C12F /* Assets.xcassets */,
 				B410819E271382D50058C12F /* LaunchScreen.storyboard */,
 				B41081A1271382D50058C12F /* Info.plist */,
+				B41081A727138ED90058C12F /* ExtensionMainViewController.swift */,
 			);
 			path = "UIKit-iTunes";
 			sourceTree = "<group>";
@@ -133,9 +136,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B4108198271382D40058C12F /* ViewController.swift in Sources */,
+				B4108198271382D40058C12F /* MainViewController.swift in Sources */,
 				B4108194271382D40058C12F /* AppDelegate.swift in Sources */,
 				B4108196271382D40058C12F /* SceneDelegate.swift in Sources */,
+				B41081A827138ED90058C12F /* ExtensionMainViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
