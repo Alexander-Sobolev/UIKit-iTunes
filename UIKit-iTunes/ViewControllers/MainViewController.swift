@@ -7,13 +7,12 @@
 
 import UIKit
 
-class MainViewController: UIViewController {
+class MainViewController: UIViewController, UITextFieldDelegate {
 
     private let emailTF: UITextField = {
         let tf = UITextField()
         tf.borderStyle = .roundedRect
         tf.placeholder = "Enter email"
-        tf.isSecureTextEntry = true
         tf.translatesAutoresizingMaskIntoConstraints = false
         return tf
     }()
@@ -34,6 +33,7 @@ class MainViewController: UIViewController {
         button.layer.cornerRadius = 15
         button.backgroundColor = #colorLiteral(red: 0.2588235438, green: 0.7568627596, blue: 0.9686274529, alpha: 1)
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(logUp), for: .touchUpInside)
         return button
     }()
 
@@ -44,17 +44,35 @@ class MainViewController: UIViewController {
         button.layer.cornerRadius = 15
         button.backgroundColor = #colorLiteral(red: 0.9372549057, green: 0.3490196168, blue: 0.1921568662, alpha: 1)
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(logIn), for: .touchUpInside)
         return button
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+        emailTF.delegate = self
+        passwordTF.delegate = self
         setItems()
+    }
+    
+    @objc private func logUp() {
+        self.present(LogUpViewController(), animated: true)
+    }
+    
+    @objc private func logIn() {
+            let navigationVC = UINavigationController(rootViewController: PlaylistViewController())
+            self.present(navigationVC, animated: true)
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        emailTF.resignFirstResponder()
+        passwordTF.resignFirstResponder()
+        return true
     }
 }
 
-//MARK: - setItems
+    //MARK: - setItems
 
 extension MainViewController {
     
@@ -66,6 +84,7 @@ extension MainViewController {
             emailTF.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
             emailTF.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15),
             emailTF.heightAnchor.constraint(equalToConstant: 50)
+            
         ])
         
         view.addSubview(passwordTF)
@@ -74,6 +93,7 @@ extension MainViewController {
             passwordTF.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
             passwordTF.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15),
             passwordTF.heightAnchor.constraint(equalToConstant: 50)
+            
         ])
         
         view.addSubview(buttonLogUP)
@@ -82,6 +102,7 @@ extension MainViewController {
             buttonLogUP.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             buttonLogUP.widthAnchor.constraint(equalToConstant: 150),
             buttonLogUP.heightAnchor.constraint(equalToConstant: 50)
+            
         ])
 
         view.addSubview(buttonLogIN)
@@ -90,6 +111,7 @@ extension MainViewController {
             buttonLogIN.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             buttonLogIN.widthAnchor.constraint(equalToConstant: 150),
             buttonLogIN.heightAnchor.constraint(equalToConstant: 50)
+            
         ])
     }
 }
