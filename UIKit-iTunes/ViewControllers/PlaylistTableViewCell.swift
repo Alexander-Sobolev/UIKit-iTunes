@@ -59,14 +59,14 @@ class PlaylistTableViewCell: UITableViewCell {
         NSLayoutConstraint.activate([
             logo.centerYAnchor.constraint(equalTo: self.centerYAnchor),
             logo.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10),
-            logo.heightAnchor.constraint(equalToConstant: 65),
-            logo.widthAnchor.constraint(equalToConstant: 65)
+            logo.heightAnchor.constraint(equalToConstant: 75),
+            logo.widthAnchor.constraint(equalToConstant: 75)
             
         ])
         
         self.addSubview(nameAlbum)
         NSLayoutConstraint.activate([
-            nameAlbum.topAnchor.constraint(equalTo: self.topAnchor, constant: 10),
+            nameAlbum.topAnchor.constraint(equalTo: self.topAnchor, constant: 5),
             nameAlbum.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10),
             nameAlbum.leadingAnchor.constraint(equalTo: logo.trailingAnchor, constant: 10)
             
@@ -74,7 +74,7 @@ class PlaylistTableViewCell: UITableViewCell {
         
         self.addSubview(nameGroup)
         NSLayoutConstraint.activate([
-            nameGroup.topAnchor.constraint(equalTo: nameAlbum.bottomAnchor, constant: 15),
+            nameGroup.topAnchor.constraint(equalTo: nameAlbum.bottomAnchor, constant: 10),
             nameGroup.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10),
             nameGroup.leadingAnchor.constraint(equalTo: logo.trailingAnchor, constant: 10)
     
@@ -82,8 +82,9 @@ class PlaylistTableViewCell: UITableViewCell {
         
         self.addSubview(countTracks)
         NSLayoutConstraint.activate([
-            countTracks.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-            countTracks.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10)
+            countTracks.topAnchor.constraint(equalTo: nameGroup.bottomAnchor, constant: 10),
+            countTracks.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10),
+            countTracks.leadingAnchor.constraint(equalTo: logo.trailingAnchor, constant: 10)
             
         ])
     }

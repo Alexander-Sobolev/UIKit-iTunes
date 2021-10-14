@@ -16,6 +16,7 @@
 		B44C27022715DC1800D1C364 /* PlaylistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B44C27012715DC1800D1C364 /* PlaylistViewController.swift */; };
 		B44C27042715DD0F00D1C364 /* PlaylistTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B44C27032715DD0F00D1C364 /* PlaylistTableViewCell.swift */; };
 		B44C27062715E39900D1C364 /* AlbumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B44C27052715E39900D1C364 /* AlbumViewController.swift */; };
+		B4CEA4F927171DBD00D62A20 /* AlbumCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4CEA4F827171DBD00D62A20 /* AlbumCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		B44C27012715DC1800D1C364 /* PlaylistViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistViewController.swift; sourceTree = "<group>"; };
 		B44C27032715DD0F00D1C364 /* PlaylistTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistTableViewCell.swift; sourceTree = "<group>"; };
 		B44C27052715E39900D1C364 /* AlbumViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumViewController.swift; sourceTree = "<group>"; };
+		B4CEA4F827171DBD00D62A20 /* AlbumCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +82,7 @@
 				B44C27012715DC1800D1C364 /* PlaylistViewController.swift */,
 				B44C27032715DD0F00D1C364 /* PlaylistTableViewCell.swift */,
 				B44C27052715E39900D1C364 /* AlbumViewController.swift */,
+				B4CEA4F827171DBD00D62A20 /* AlbumCollectionViewCell.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -153,6 +156,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B4CEA4F927171DBD00D62A20 /* AlbumCollectionViewCell.swift in Sources */,
 				B44C26FE2715CC6F00D1C364 /* LogUpViewController.swift in Sources */,
 				B4108198271382D40058C12F /* MainViewController.swift in Sources */,
 				B44C27022715DC1800D1C364 /* PlaylistViewController.swift in Sources */,
