@@ -9,6 +9,9 @@ import UIKit
 
 class PlaylistViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
     
+    var albums = [Songs]()
+    var timer: Timer?
+    
     private let tableView: UITableView = {
         let tableView = UITableView()
         tableView.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
@@ -32,15 +35,37 @@ class PlaylistViewController: UIViewController, UITableViewDelegate, UITableView
         navigationItem.searchController = searchController
         setTableView()
     }
+    
+    private func fetchAlbums(albumName: String) {
+        
+        let urlString = "https://itunes.apple.com/search?term=\(albumName)&entity=album&attribute=albumTerm"
+        
+        DataFetch.shared.fetchAlbums(url: urlString) { [weak self] albumModel, error in
+            if error == nil {
+                guard let albumModel = albumModel  else { return }
+                
+                    let sortedAlbums = albumModel.results.sorted(by: { (firstItem, secondItem) -> Bool in
+                        return firstItem.collectionName.compare(secondItem.collectionName) == ComparisonResult.orderedAscending
+                    })
+
+                self?.albums = sortedAlbums
+                self?.tableView.reloadData()
+                } else {
+                    print(error!.localizedDescription)
+            }
+        }
+    }
 
     // MARK: - UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return albums.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Identifier", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Identifier", for: indexPath) as! PlaylistTableViewCell
+        let album = albums[indexPath.row]
+        cell.configureAlbum(album: album)
         return cell
     }
     
@@ -49,11 +74,21 @@ class PlaylistViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        navigationController?.pushViewController(AlbumViewController(), animated: true)
+        let albumVC = AlbumViewController()
+        let album = albums[indexPath.row]
+        albumVC.album = album
+        albumVC.title = album.artistName
+        navigationController?.pushViewController(albumVC, animated: true)
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        print(searchText)
+        
+        if searchText != "" {
+            timer?.invalidate()
+            timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false, block: { [weak self] _ in
+                self?.fetchAlbums(albumName: searchText)
+            })
+        }
     }
 }
    

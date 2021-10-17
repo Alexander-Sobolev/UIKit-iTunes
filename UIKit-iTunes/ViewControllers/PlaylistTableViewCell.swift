@@ -88,4 +88,25 @@ class PlaylistTableViewCell: UITableViewCell {
             
         ])
     }
+    
+    func configureAlbum(album: Songs) {
+        
+        if let urlString = album.artworkUrl100 {
+            Request.shared.requestData(url: urlString) { result in
+                    switch result {
+                    case .success(let data):
+                        let image = UIImage(data: data)
+                        self.logo.image = image
+                    case .failure(let error):
+                        self.logo.image = nil
+                        print("Not found" + error.localizedDescription)
+                }
+            }
+        } else {
+            logo.image = nil
+        }
+        nameAlbum.text = album.collectionName
+        nameGroup.text = album.artistName
+        countTracks.text = "\(album.trackCount) tracks"
+}
 }

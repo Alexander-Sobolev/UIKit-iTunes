@@ -9,6 +9,9 @@ import UIKit
 
 class AlbumViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
    
+    var album: Songs?
+    var song = [Song]()
+    
     private let logo: UIImageView = {
         let imageView = UIImageView()
         imageView.backgroundColor = #colorLiteral(red: 0.9372549057, green: 0.3490196168, blue: 0.1921568662, alpha: 1)
@@ -58,25 +61,89 @@ class AlbumViewController: UIViewController, UICollectionViewDelegate, UICollect
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
-        collectionView.register(AlbumCollectionViewCell.self, forCellWithReuseIdentifier: "cell")
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.register(AlbumCollectionViewCell.self, forCellWithReuseIdentifier: "Identifier1")
         setItems()
-       
+        setupModel()
+        fetchPlaylist(album: album)
+    }
+    
+    private func setupModel() {
+        
+        guard let album = album else { return }
+        
+        nameAlbum.text = album.collectionName
+        nameGroup.text = album.artistName
+        albumDate.text = setupDate(date: album.releaseDate)
+        countTracks.text = "\(album.trackCount) tracks:"
+        
+        guard let url = album.artworkUrl100 else { return }
+        setupImage(urlString: url)
+    }
+    
+    
+    private func setupDate(date: String) -> String {
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ssZZZ"
+        guard let backendDate = dateFormatter.date(from: date) else { return "" }
+        
+        let formatDate = DateFormatter()
+        formatDate.dateFormat = "dd-MM-yyyy"
+        let date = formatDate.string(from: backendDate)
+        return date
+    }
+    
+    private func setupImage(urlString: String?) {
+        if let url = urlString {
+            Request.shared.requestData(url: url) { [weak self] result in
+                switch result {
+                case .success(let data):
+                    let image = UIImage(data: data)
+                    self?.logo.image = image
+                case .failure(let error):
+                    self?.logo.image = nil
+                    print("No album logo" + error.localizedDescription)
+                }
+            }
+        } else {
+            logo.image = nil
+        }
+    }
+    
+    private func fetchPlaylist(album: Songs?) {
+        
+        guard let album = album else { return }
+        let idAlbum = album.collectionId
+        let urlString = "https://itunes.apple.com/lookup?id=\(idAlbum)&entity=song"
+        
+        DataFetch.shared.fetchSongs(urlString: urlString) { [weak self] songModel, error in
+            if error == nil {
+                guard let songModel = songModel  else { return }
+                self?.song = songModel.results
+                self?.collectionView.reloadData()
+            } else {
+                print(error!.localizedDescription)
+            }
+        }
     }
       
 //MARK: - CollectionViewDelegate
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        5
+        song.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Identifier", for: indexPath) as! AlbumCollectionViewCell
-        cell.nameSong.text = "Count Tracks"
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Identifier1", for: indexPath) as! AlbumCollectionViewCell
+        let song = song[indexPath.row].trackName
+        cell.nameTracks.text = song 
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        CGSize(width: 100, height: 20)
+        CGSize(width: 130, height: 30)
     }
 }
 //MARK: - SetConstraints
@@ -96,6 +163,7 @@ extension AlbumViewController {
         NSLayoutConstraint.activate([
             nameAlbum.topAnchor.constraint(equalTo: logo.bottomAnchor, constant: 20),
             nameAlbum.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            nameAlbum.widthAnchor.constraint(equalToConstant: 150)
         ])
         
         view.addSubview(nameGroup)

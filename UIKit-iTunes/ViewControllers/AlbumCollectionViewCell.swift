@@ -9,10 +9,11 @@ import UIKit
 
 class AlbumCollectionViewCell: UICollectionViewCell {
     
-    let nameSong: UILabel = {
+    let nameTracks: UILabel = {
        let label = UILabel()
         label.tintColor = .black
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.textAlignment = .center
         return label
     }()
     
@@ -29,12 +30,12 @@ class AlbumCollectionViewCell: UICollectionViewCell {
    
     func setConstraints() {
         
-        self.addSubview(nameSong)
+        self.addSubview(nameTracks)
         NSLayoutConstraint.activate([
-            nameSong.topAnchor.constraint(equalTo: self.topAnchor, constant: 0),
-            nameSong.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 0),
-            nameSong.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 0),
-            nameSong.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 0),
+            nameTracks.topAnchor.constraint(equalTo: self.topAnchor, constant: 0),
+            nameTracks.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 0),
+            nameTracks.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 0),
+            nameTracks.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 0)
         ])
     }
 }
